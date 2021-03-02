@@ -37,12 +37,12 @@ public class ptbac2 {
 
     public String resolve() {
       
-        if ( (dt = b * b - 4 * a * c) == 0)
+        if (( b * b - 4 * a * c) == 0)
             return "phuong trinh co nghiem duy nhat: " + -b / 2 * a + ".";
-        else if ((dt = b * b - 4 * a * c) < 0)
+        else if ((b * b - 4 * a * c) < 0)
             return "phuong trinh vo nghiem.";
         else
-            return " phuong trinh co cap nghiem: " + (-b + sqrt(dt = b * b - 4 * a * c)) / (2 * a) + " va " + (-b - sqrt(dt = b * b - 4 * a * c)) / (2 * a)
+            return " phuong trinh co cap nghiem: " + (-b + sqrt( b * b - 4 * a * c)) / (2 * a) + " va " + (-b - sqrt( b * b - 4 * a * c)) / (2 * a)
                     + ".";
     }
 }
