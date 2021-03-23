@@ -3,11 +3,11 @@ import java.util.*;
 
 public class Order {
     public static final int MAX_NUMBERS_ORDERED = 3;
-    public static final int MAX_LIMITTED_ORDERS = 5;
-    public static int nbOrder;
+    public static final int MAX_LIMITTED_ORDERS = 2;
+    private static int nbOrder=0;
     private DigitalVideoDisc itemsOrdered[] = new DigitalVideoDisc[MAX_NUMBERS_ORDERED];
-    int dem=0;
-    int stt=0;
+    private int dem=0;
+    private int stt=0;
     boolean cont=true;
     Scanner sc = new Scanner(System.in);
 
@@ -16,10 +16,10 @@ public class Order {
     }
 
     public void qtyOrdered(){
-        if(dem<2) System.out.println("Đã được thêm vào Order");
-        if(dem==2) System.out.println("Đã được thêm vào Order,Order sắp đầy"); 
-        if(dem==3) System.out.println("Đã được thêm vào Order,Order đã đầy"); 
-        if(dem>3) System.out.println("Đã đầy, không thể thêm");
+        if(dem<MAX_NUMBERS_ORDERED-1) System.out.println("Đã được thêm vào Order");
+        if(dem==MAX_NUMBERS_ORDERED-1) System.out.println("Đã được thêm vào Order,Order sắp đầy"); 
+        if(dem==MAX_NUMBERS_ORDERED) System.out.println("Đã được thêm vào Order,Order đã đầy"); 
+        if(dem>MAX_NUMBERS_ORDERED) System.out.println("Đã đầy, không thể thêm");
     }
 
     public void addDigitalVideoDisc(DigitalVideoDisc disc){
@@ -35,20 +35,20 @@ public class Order {
     }
 
     public void addDigitalVideoDiscmang(DigitalVideoDisc[] disc){
-         if(nbOrder<=MAX_LIMITTED_ORDERS){
+        if(nbOrder<=MAX_LIMITTED_ORDERS){
             itemsOrdered = disc;
-             while(cont){
+            while(cont){
                 dem++;
                 stt++;
                 System.out.println(stt + ". DVD - " + disc[dem-1].getTitle() + " - " + disc[dem-1].getCategory() + " - " + disc[dem-1].getDirector() + " - " + disc[dem-1].getLength() + " - " + disc[dem-1].getCost());
                 qtyOrdered();
-                if(dem>3){
+                if(dem>MAX_NUMBERS_ORDERED){
                     int chon;
                     int nhapDVD;
                     boolean a=true;
                     System.out.println("Bạn có muốn xóa 1 DVD đã chọn để thay thế DVD này");
                     System.out.println("1.có\n2.không");  
-                   do{
+                do{
                     System.out.print("Bạn chọn: "); chon=sc.nextInt();
                     switch(chon){
                         case 1:
@@ -61,23 +61,28 @@ public class Order {
                         case 2:
                         System.out.println("DVD" + stt +" đã xóa khỏi danh sách");
                         a = false;
-                        dem--;
                         break;
                         default:
                         System.out.println("Bạn chọn sai, hãy chọn lại");
                         break;
                     }
-                   }while(a);
+                }while(a);
                 }
                 if(stt == disc.length) cont=false;
-             }  
-          }else System.out.println("Đã quá giới hạn cho phép");    
+            } 
+        }else System.out.println("Đã quá giới hạn cho phép");
     }
 
     public float totalCost(DigitalVideoDisc[] disc){
         float tong=0;
-        for(int i=0;i<dem ;i++){
-            tong +=disc[i].getCost();
+        if(dem>MAX_NUMBERS_ORDERED){
+            for(int i=0;i<MAX_NUMBERS_ORDERED ;i++){
+                tong +=disc[i].getCost();
+            }
+        } else{
+            for(int i=0;i<dem ;i++){
+                tong +=disc[i].getCost();
+            }
         }
         return tong;
     }
@@ -88,6 +93,5 @@ public class Order {
                 itemsOrdered[i]=itemsOrdered[i+1];
             }        
         } 
-        dem--;
     }
 }
