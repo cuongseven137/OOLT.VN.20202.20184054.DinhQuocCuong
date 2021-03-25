@@ -1,0 +1,62 @@
+import Disc.*;
+import Order.Order;
+import Utils.Mydate;
+import java.util.*;
+
+public class DiskTest {
+    public static void main(String[] args) {
+        Order order = new Order();
+        DigitalVideoDisc dvd1 = new DigitalVideoDisc("The Lion King", "Animation", "Roger Allers", 11, 77.95f);
+        DigitalVideoDisc dvd2 = new DigitalVideoDisc("Star Wars", "Science Fiction", "George Lucas", 22, 88.95f);
+        DigitalVideoDisc dvd3 = new DigitalVideoDisc("The Dark Knight", "Action Movie", "Christopher Nolan", 33, 99.95f);
+        DigitalVideoDisc dvd4 = new DigitalVideoDisc("Terminator 2: Judgment Day", "Action Movie", "James Cameron", 44, 111.95f);
+        DigitalVideoDisc dvd5 = new DigitalVideoDisc("Die Hard", "Action Movie", "John McTiernan", 55, 222.95f);
+        DigitalVideoDisc dvd6 = new DigitalVideoDisc("Inception", "Action Movie", "Christopher Nolan", 66, 33.95f);
+        DigitalVideoDisc dvd7 = new DigitalVideoDisc("Conan", "Action Movie", "Christopher Nolan", 80, 40.95f);
+        DigitalVideoDisc dvd8 = new DigitalVideoDisc("One Piece", "Action Movie", "Christopher Nolan", 100, 70.65f);
+        DigitalVideoDisc dvd9 = new DigitalVideoDisc("Harry Potter", "Action Movie", "Christopher Nolan", 76, 30.95f);
+        DigitalVideoDisc dvd10 = new DigitalVideoDisc("Dragon", "Action Movie", "Christopher Nolan", 132, 323.95f);
+
+        DigitalVideoDisc[] disc = {dvd4, dvd5, dvd6,dvd7,dvd8,dvd9,dvd10};
+        order.addDigitalVideoDisc(dvd1);
+        order.addDigitalVideoDisc(dvd2, dvd3);
+        order.addDigitalVideoDisc(disc);
+       
+        Scanner sc = new Scanner(System.in);
+        boolean check = true;
+        int select;
+        do {
+            System.out.println("1. Hiện thị danh sách đơn hàng."); 
+            System.out.println("2. Tìm kiếm title."); 
+            System.out.println("3. dvd lucky."); 
+            System.out.println("4. Thoát."); 
+            System.out.print("Bạn chọn: "); 
+            select=sc.nextInt();
+            switch(select) {
+                case 1:
+                    order.show();
+                    break;
+                case 2:
+                    DigitalVideoDisc d1 = new DigitalVideoDisc("HARRY agdkjh áhdkja Potter", "Animation", "Roger Allers", 11, 77.95f);
+                    System.out.println(d1.search("Harry Potter"));
+                    DigitalVideoDisc d2 = new DigitalVideoDisc("HARRY Potter", "Animation", "Roger Allers", 11, 77.95f);
+                    System.out.println(d2.search("Harry Potter"));
+                    DigitalVideoDisc d3 = new DigitalVideoDisc("HARRY sjydkhao", "Animation", "Roger Allers", 11, 77.95f);
+                    System.out.println(d3.search("Harry Potter"));
+                    break;
+                case 3:
+                    DigitalVideoDisc itemsOrdered[] = order.getDvdList();
+                    System.out.println("dvd may mắn được free");
+                    System.out.println(order.getALuckyItem().getTitle() + " - " + order.getALuckyItem().getCategory() + " - " + order.getALuckyItem().getDirector() + " - " + order.getALuckyItem().getLength() + " - " + order.getALuckyItem().getCost());
+                    break;
+                case 4:
+                    System.out.println("Xin chào tạm biệt!");
+                    check = false;
+                    break;
+                default:
+                    System.out.println("Nhập sai, hãy nhập lại");
+                    break;
+            }
+        } while(check);
+    }
+}
