@@ -10,6 +10,7 @@ public class Order {
     public static Order or[] = new Order[MAX_LIMITED_ORDERED];
     public static int nbOrder = 0;
     int dem = 0;
+    int rand = 10;
     private DigitalVideoDisc itemsOrdered[] = new DigitalVideoDisc[MAX_NUMBERS_ORDERED];
 
     public Order(){
@@ -100,6 +101,9 @@ public class Order {
         for (int i = 0; i < dem; i++) {
             tong += itemsOrdered[i].getCost();
         }
+        if(rand != 10){
+            tong -= getALuckyItem().getCost();
+        }
         return tong;
     }
 
@@ -112,15 +116,18 @@ public class Order {
                     itemsOrdered[j]=itemsOrdered[j + 1];
                 }
                 dem--;
-                System.out.println("Đã xóa phần tử khỏi mảng");
+                System.out.println("Đã xóa phần tử khỏi danh sách");
             }
         }
     }
         
-    public DigitalVideoDisc getALuckyItem(){
-        int range = 10;
-        int rand = (int)(Math.random() * range) ;
-        itemsOrdered[rand].setCost(0f);
+   public DigitalVideoDisc getALuckyItem(){
         return itemsOrdered[rand];
+    }
+
+    public int random(){
+        int range = 10;
+        rand = (int)(Math.random() * range) ;
+        return rand;
     }
 }
