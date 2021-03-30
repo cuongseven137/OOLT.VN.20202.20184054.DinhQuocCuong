@@ -6,13 +6,21 @@ import java.lang.Math;
 
 public class Order {
 
-    public static final int MAX_NUMBERS_ORDERED = 10;
+    public static final int MAX_NUMBERS_ORDERED_ITEMS = 10;
     public static final int MAX_LIMITED_ORDERED = 5;
-    public static Order or[] = new Order[MAX_LIMITED_ORDERED];
+    // public static Order or[] = new Order[MAX_LIMITED_ORDERED];
     public static int nbOrder = 0;
-    int dem = 0;
-    int rand = 10;
-    private DigitalVideoDisc itemsOrdered[] = new DigitalVideoDisc[MAX_NUMBERS_ORDERED];
+    // int dem = 0;
+    private int luckyItem = 0;
+    public DigitalVideoDisc itemsOrdered[] = new DigitalVideoDisc[MAX_NUMBERS_ORDERED_ITEMS];
+
+    public int getLuckyItem() {
+        return luckyItem;
+    }
+
+    public static boolean checkNumberOfOrder() {
+        return (nbOrder <= 5);
+    }
 
     public Order() {
         nbOrder++;
@@ -22,122 +30,80 @@ public class Order {
         return itemsOrdered;
     }
 
-    public void qtyOrdered() {
-        dem++;
-        if (dem < MAX_NUMBERS_ORDERED - 1) {
+    public int getQuantityOrdered() {
+        int count = 0;
+        for (int i = 0; i < itemsOrdered.length; i++) {
+            if (itemsOrdered[i] != null)
+                count++;
+        }
+        return count;
+    }
+
+    public void verifyOrderedItem() {
+        int dem = getQuantityOrdered();
+        if (dem < MAX_NUMBERS_ORDERED_ITEMS - 1) {
             System.out.println("Đã được thêm vào Order");
         }
-        if (dem == MAX_NUMBERS_ORDERED - 1) {
-            System.out.println("Đã được thêm vào Order,Order sắp đầy");
-        }
-        if (dem == MAX_NUMBERS_ORDERED) {
+        if (dem == MAX_NUMBERS_ORDERED_ITEMS - 1) {
             System.out.println("Đã được thêm vào Order,Order đã đầy");
         }
-        if (dem > MAX_NUMBERS_ORDERED) {
+        if (dem > MAX_NUMBERS_ORDERED_ITEMS - 1) {
             System.out.println("Đã đầy, không thể thêm");
         }
     }
 
     public void addDigitalVideoDisc(DigitalVideoDisc disc) {
-        if (nbOrder <= MAX_LIMITED_ORDERED) {
-            if (dem < MAX_NUMBERS_ORDERED) {
-                itemsOrdered[dem] = disc;
-                qtyOrdered();
-            } else {
-                qtyOrdered();
-                dem--;
-            }
-        } else {
-            System.out.println("quá giới hạn,k được thêm vào order");
-        }
+        verifyOrderedItem();
+        if (getQuantityOrdered() < MAX_NUMBERS_ORDERED_ITEMS)
+            itemsOrdered[getQuantityOrdered()] = disc;
     }
 
     public void addDigitalVideoDisc(DigitalVideoDisc disc1, DigitalVideoDisc disc2) {
-        if (nbOrder <= MAX_LIMITED_ORDERED) {
-            if (dem < MAX_NUMBERS_ORDERED) {
-                itemsOrdered[dem] = disc1;
-                qtyOrdered();
-            } else {
-                qtyOrdered();
-                dem--;
-            }
-            if (dem < MAX_NUMBERS_ORDERED) {
-                itemsOrdered[dem] = disc2;
-                qtyOrdered();
-            } else {
-                qtyOrdered();
-                dem--;
-            }
-        } else {
-            System.out.println("quá giới hạn,k được thêm vào order");
-        }
+        addDigitalVideoDisc(disc1);
+        addDigitalVideoDisc(disc2);
     }
 
     // Thêm mảng dvd vào order
     public void addDigitalVideoDisc(DigitalVideoDisc[] dvdList) {
-        if (nbOrder <= MAX_LIMITED_ORDERED) {
-            for (int i = 0; i < dvdList.length; i++) {
-                if (dem < MAX_NUMBERS_ORDERED) {
-                    itemsOrdered[dem] = dvdList[i];
-                    qtyOrdered();
-                } else {
-                    qtyOrdered();
-                    dem--;
-                }
-            }
-        } else {
-            System.out.println("quá giới hạn,k được thêm vào order");
+        for (int i = 0; i < dvdList.length; i++) {
+            addDigitalVideoDisc(dvdList[i]);
         }
     }
 
     public void show() {
-        for (int i = 0; i < dem; i++) {
-            System.out.println("Id: " + (i + 1));
-            System.out.println("Title: " + itemsOrdered[i].getTitle());
-            System.out.println("Category: " + itemsOrdered[i].getCategory());
-            System.out.println("Director: " + itemsOrdered[i].getDirector());
-            System.out.println("Length: " + itemsOrdered[i].getLength());
-            System.out.println("Cost: " + itemsOrdered[i].getCost());
-            if (rand != 10) {
-                if (itemsOrdered[i] == itemsOrdered[rand]) {
-                    System.out.println("Được free");
-                } else
-                    continue;
-            }
-            System.out.println("------------------------------------");
+        System.out.println("------------------------------------");
+        for (int i = 0; i < getQuantityOrdered(); i++) {
+            System.out.println(i + itemsOrdered[i].showInfo());
         }
+        System.out.println("------------------------------------");
+        System.out.println("Total cost: " + totalCost());
+        System.out.println("Lucky Item gets free: " + itemsOrdered[luckyItem].showInfo());
     }
 
     public float totalCost() {
         float tong = 0;
-        for (int i = 0; i < dem; i++) {
+        for (int i = 0; i < getQuantityOrdered(); i++) {
             tong += itemsOrdered[i].getCost();
         }
-        if (rand != 10) {
-            tong -= getALuckyItem().getCost();
-        }
+        randomLuckyItem();
+        tong -= itemsOrdered[luckyItem].getCost();
         return tong;
     }
 
     public void removeDigitalVideoDisc(DigitalVideoDisc disc) {
-        for (int i = 0; i < dem; i++) {
+        for (int i = 0; i < getQuantityOrdered(); i++) {
             if (itemsOrdered[i] == disc) {
-                for (int j = i; j < dem - 1; j++) {
+                for (int j = i; j < getQuantityOrdered() - 1; j++) {
                     itemsOrdered[j] = itemsOrdered[j + 1];
                 }
-                dem--;
                 System.out.println("Đã xóa phần tử khỏi danh sách");
+                break;
             }
         }
     }
 
-    public DigitalVideoDisc getALuckyItem() {
-        return itemsOrdered[rand];
-    }
-
-    public int random() {
+    public void randomLuckyItem() {
         int range = 10;
-        rand = (int) (Math.random() * range);
-        return rand;
+        this.luckyItem = (int) (Math.random() * range);
     }
 }
