@@ -29,7 +29,8 @@ public class DiskTest {
             System.out.println("1. Hiện thị danh sách đơn hàng."); 
             System.out.println("2. Tìm kiếm title."); 
             System.out.println("3. dvd lucky."); 
-            System.out.println("4. Thoát."); 
+            System.out.println("4. Tính tổng tiền."); 
+            System.out.println("5. Thoát."); 
             System.out.print("Bạn chọn: "); 
             select=sc.nextInt();
             switch(select) {
@@ -37,19 +38,29 @@ public class DiskTest {
                     order.show();
                     break;
                 case 2:
-                    DigitalVideoDisc d1 = new DigitalVideoDisc("HARRY agdkjh áhdkja Potter", "Animation", "Roger Allers", 11, 77.95f);
-                    System.out.println(d1.search("Harry Potter"));
-                    DigitalVideoDisc d2 = new DigitalVideoDisc("HARRY Potter", "Animation", "Roger Allers", 11, 77.95f);
-                    System.out.println(d2.search("Harry Potter"));
-                    DigitalVideoDisc d3 = new DigitalVideoDisc("HARRY sjydkhao", "Animation", "Roger Allers", 11, 77.95f);
-                    System.out.println(d3.search("Harry Potter"));
+                    DigitalVideoDisc itemsOrdered[] = order.getDvdList();
+                    int count = 0;
+                    System.out.print("Nhập tiêu đề muốn tìm: "); 
+                    String td = sc.nextLine();
+                    System.out.println("Những dvd chứa tiêu đề " + td + " : ");
+                    for(int i = 0; i < itemsOrdered.length ; i++){
+                        if(itemsOrdered[i].search(td) == true){
+                            System.out.println(itemsOrdered[i].getTitle() + " - " + itemsOrdered[i].getCategory() + " - " + itemsOrdered[i].getDirector() + " - " + itemsOrdered[i].getLength() + " - " + itemsOrdered[i].getCost());
+                            count++;
+                        }
+                    }
+                    if(count == 0) System.out.println("Không có dvd nào chứa tiêu đề " + td);
                     break;
                 case 3:
                     DigitalVideoDisc itemsOrdered[] = order.getDvdList();
                     System.out.println("dvd may mắn được free");
+                    order.random();
                     System.out.println(order.getALuckyItem().getTitle() + " - " + order.getALuckyItem().getCategory() + " - " + order.getALuckyItem().getDirector() + " - " + order.getALuckyItem().getLength() + " - " + order.getALuckyItem().getCost());
                     break;
                 case 4:
+                    System.out.println("Tổng tiền: " + order.totalCost()); 
+                    break;
+                case 5:
                     System.out.println("Xin chào tạm biệt!");
                     check = false;
                     break;
