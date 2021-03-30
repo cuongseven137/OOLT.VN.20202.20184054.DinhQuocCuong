@@ -4,8 +4,18 @@ import Utils.Mydate;
 import java.util.*;
 
 public class DiskTest {
+
+    public static Order createOrder() {
+        if (Order.checkNumberOfOrder()) {
+            return new Order();
+        } else {
+            System.out.println("Cannot create more order...");
+            return null;
+        }
+    }
+
     public static void main(String[] args) {
-        Order order = new Order();
+        Order order = createOrder();
         DigitalVideoDisc dvd1 = new DigitalVideoDisc("The Lion King", "Animation", "Roger Allers", 11, 77.95f);
         DigitalVideoDisc dvd2 = new DigitalVideoDisc("Star Wars", "Science Fiction", "George Lucas", 22, 88.95f);
         DigitalVideoDisc dvd3 = new DigitalVideoDisc("The Dark Knight", "Action Movie", "Christopher Nolan", 33,
@@ -18,8 +28,9 @@ public class DiskTest {
         DigitalVideoDisc dvd8 = new DigitalVideoDisc("One Piece", "Action Movie", "Christopher Nolan", 100, 70.65f);
         DigitalVideoDisc dvd9 = new DigitalVideoDisc("Harry Potter", "Action Movie", "Christopher Nolan", 76, 30.95f);
         DigitalVideoDisc dvd10 = new DigitalVideoDisc("Dragon", "Action Movie", "Christopher Nolan", 132, 323.95f);
+        DigitalVideoDisc dvd11 = new DigitalVideoDisc("Dragon", "Action Movie", "Christopher Nolan", 132, 323.95f);
 
-        DigitalVideoDisc[] disc = { dvd4, dvd5, dvd6, dvd7, dvd8, dvd9, dvd10 };
+        DigitalVideoDisc[] disc = { dvd4, dvd5, dvd6, dvd7, dvd8, dvd9, dvd10, dvd11 };
         order.addDigitalVideoDisc(dvd1);
         order.addDigitalVideoDisc(dvd2, dvd3);
         order.addDigitalVideoDisc(disc);
@@ -59,10 +70,8 @@ public class DiskTest {
                 break;
             case 3:
                 System.out.println("dvd may mắn được free");
-                order.random();
-                System.out.println(order.getALuckyItem().getTitle() + " - " + order.getALuckyItem().getCategory()
-                        + " - " + order.getALuckyItem().getDirector() + " - " + order.getALuckyItem().getLength()
-                        + " - " + order.getALuckyItem().getCost());
+                order.randomLuckyItem();
+                System.out.println(order.itemsOrdered[order.getLuckyItem()].showInfo());
                 break;
             case 4:
                 System.out.println("Tổng tiền: " + order.totalCost());
