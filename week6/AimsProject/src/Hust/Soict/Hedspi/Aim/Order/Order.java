@@ -63,6 +63,10 @@ public class Order {
             System.out.println("removed from the list");
         } else System.out.println("Does not exist");
     }
+    
+     public void removeItem(ArrayList<Media> items ){
+       items.clear();
+    }
 
     public void removeItembyid(int id){
         int count = 0;
