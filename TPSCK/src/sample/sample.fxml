@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="627.0" prefWidth="1097.0" style="-fx-background-color: #dcdde1;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <children>
+      <AnchorPane fx:id="display" layoutX="14.0" layoutY="14.0" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" />
+      <AnchorPane layoutX="630.0" layoutY="12.0" prefHeight="606.0" prefWidth="443.0">
+         <children>
+            <HBox alignment="CENTER" layoutX="7.0" layoutY="14.0" prefHeight="100.0" prefWidth="424.0" style="-fx-background-color: #34ace0; -fx-background-radius: 5;">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="100.0" prefWidth="96.0" style="-fx-background-color: #ffffff; -fx-background-radius: 5;">
+                     <children>
+                        <Label text="Start">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font></Label>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Button fx:id="startButton" mnemonicParsing="false" onAction="#startButtonOnAction" prefHeight="26.0" prefWidth="50.0" text="Start">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin></Button>
+                        <Button fx:id="ResetButton" mnemonicParsing="false" onAction="#ResetButtonOnAction" prefHeight="26.0" prefWidth="48.0" text="Reset" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="100.0" prefWidth="142.0">
+                     <children>
+                        <ComboBox fx:id="chooseAlgorithm" onAction="#chooseAlgorithmOnAction" prefWidth="150.0" promptText="Choose Algorithm" />
+                     </children>
+                  </VBox>
+                  <HBox prefHeight="100.0" prefWidth="39.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="7.0" layoutY="412.0" prefHeight="179.0" prefWidth="424.0" style="-fx-background-color: #55efc4; -fx-background-radius: 5;">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #ffffff;">
+                     <children>
+                        <Label text="Input File">
+                           <font>
+                              <Font name="System Italic" size="18.0" />
+                           </font></Label>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="179.0" prefWidth="242.0">
+                     <children>
+                        <TextField fx:id="inputFile" promptText="Enter File Location">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin></TextField>
+                        <TextField fx:id="numberOfCityInputFile" promptText="Number Of City" />
+                        <Button fx:id="setInputFile" mnemonicParsing="false" onAction="#setInputFileButtonOnAction" text="Set" />
+                     </children>
+                  </VBox>
+                  <HBox prefHeight="179.0" prefWidth="36.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="7.0" layoutY="300.0" prefHeight="100.0" prefWidth="424.0" style="-fx-background-color: #fab1a0; -fx-background-radius: 5;">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #ffffff;">
+                     <children>
+                        <Label text="Input Hand">
+                           <font>
+                              <Font name="System Italic" size="18.0" />
+                           </font></Label>
+                     </children>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="96.0" prefWidth="247.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="33.0" prefWidth="247.0">
+                           <children>
+                              <TextField prefHeight="26.0" prefWidth="154.0" promptText="Number Of City" />
+                              <Button mnemonicParsing="false" text="ok" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="23.0" prefWidth="247.0">
+                           <children>
+                              <Label text="City#: " />
+                              <Label text="1" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="38.0" prefWidth="247.0">
+                           <children>
+                              <TextField prefHeight="26.0" prefWidth="94.0">
+                                 <HBox.margin>
+                                    <Insets right="5.0" />
+                                 </HBox.margin>
+                              </TextField>
+                              <TextField prefHeight="26.0" prefWidth="90.0">
+                                 <HBox.margin>
+                                    <Insets left="5.0" />
+                                 </HBox.margin>
+                              </TextField>
+                              <Button mnemonicParsing="false" text="Set">
+                                 <HBox.margin>
+                                    <Insets left="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <HBox prefHeight="100.0" prefWidth="29.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="7.0" layoutY="129.0" prefHeight="158.0" prefWidth="424.0" style="-fx-background-color: #ffeaa7; -fx-background-radius: 5;">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="158.0" prefWidth="100.0" style="-fx-background-color: #ffffff; -fx-background-radius: 5;">
+                     <children>
+                        <Label text="Controll">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font></Label>
+                     </children>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Button fx:id="pauseButton" mnemonicParsing="false" onAction="#pauseButtonOnAction" style="-fx-background-color: #ff7675;" text="Pause" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="158.0" prefWidth="178.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="61.0" prefWidth="178.0">
+                           <children>
+                              <ComboBox fx:id="speedButton" prefHeight="26.0" prefWidth="125.0" promptText="Choose Delay" />
+                              <Button fx:id="setDelay" mnemonicParsing="false" onAction="#setDelayOnAction" prefHeight="26.0" prefWidth="43.0" text="Set" />
+                           </children>
+                        </HBox>
+                        <VBox prefHeight="48.0" prefWidth="178.0">
+                           <children>
+                              <HBox prefHeight="20.0" prefWidth="178.0">
+                                 <children>
+                                    <Label text="1" />
+                                    <HBox prefHeight="39.0" prefWidth="69.0" />
+                                    <Label text="5" />
+                                    <HBox prefHeight="39.0" prefWidth="77.0" />
+                                    <Label text="10" />
+                                 </children>
+                              </HBox>
+                              <Slider fx:id="speedSlider" blockIncrement="1.0" max="10.0" min="1.0" onDragDetected="#speedSliderOnChange" onDragDone="#speedSliderOnChange" onMouseClicked="#speedSliderOnChange" value="1.0" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
